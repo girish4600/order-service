@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import java.util.Optional;
 
 @Service
-@FeignClient(name = "customer-service"/*, url = "http://customer-service:8081"*/)
+@FeignClient(name = "customer-service", url = "http://customer-service:8081")
 public interface CustomerService {
     @GetMapping("/v1/customer/{customerId}")
     Optional<CustomerResponse> findById(@PathVariable("customerId") Integer customerId);
