@@ -48,8 +48,8 @@ public class OrderServiceImpl implements OrderService {
         log.info("purchaseRequest :: {}", orderRequest.purchaseRequests());
         var purchaseList = productService.purchaseProduct(orderRequest.purchaseRequests());
         log.info("======================== completed purchaseProduct ======================== \n PURCHASE LIST {} \n ======================== ",purchaseList);
-
-        var order = orders.put(orderId++, mapper.dtoToOrderEntity(orderRequest, orderId));
+        Order order = mapper.dtoToOrderEntity(orderRequest, orderId);
+        orders.put(orderId++, order);
         var paymentRequest = new PaymentRequest(
                 orderRequest.amount(),
                 orderRequest.paymentMethod(),
