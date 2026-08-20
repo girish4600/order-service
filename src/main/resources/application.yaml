@@ -3,6 +3,9 @@ spring:
     name: order-service
   kafka:
     bootstrap-servers: ${SPRING_KAFKA_BOOTSTRAP_SERVERS}
+    #added to auto crate topics in kafka
+    admin:
+      auto-create: true
 
 server:
   port: 8082
