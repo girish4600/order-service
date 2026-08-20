@@ -1,6 +1,8 @@
 spring:
   application:
     name: order-service
+  kafka:
+    bootstrap-servers: ${SPRING_KAFKA_BOOTSTRAP_SERVERS}
 
 server:
   port: 8082
