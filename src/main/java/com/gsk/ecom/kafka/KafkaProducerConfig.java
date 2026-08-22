@@ -39,7 +39,7 @@ public class KafkaProducerConfig {
         config.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
         config.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, JsonSerializer.class);
         //need to add alias(orderConfirmation) here
-        config.put(JsonSerializer.TYPE_MAPPINGS, "orderConfirmation:com.gsk.order.kafka.model.OrderNotificationRequest");
+        config.put(JsonSerializer.TYPE_MAPPINGS, "orderConfirmation:com.gsk.ecom.kafka.model.OrderNotificationRequest");
 
         return new DefaultKafkaProducerFactory<>(config);
     }
