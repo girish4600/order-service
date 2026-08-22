@@ -1,6 +1,8 @@
 package com.gsk.ecom.service.order;
 
 import com.gsk.ecom.handler.order.BusinessException;
+import com.gsk.ecom.kafka.NotificationProducer;
+import com.gsk.ecom.kafka.model.OrderNotificationRequest;
 import com.gsk.ecom.mapper.order.OrderMapper;
 import com.gsk.ecom.model.order.Order;
 import com.gsk.ecom.model.order.OrderRequest;
@@ -38,6 +40,9 @@ public class OrderServiceImpl implements OrderService {
     @Autowired
     private OrderMapper mapper;
 
+    @Autowired
+    private NotificationProducer notificationProducer;
+
     @Override
     public String placeOrder(OrderRequest orderRequest) {
         var custId = orderRequest.customerId();
@@ -61,7 +66,17 @@ public class OrderServiceImpl implements OrderService {
         log.info("======================== Calling payment creation ========================");
         paymentService.createPayment(paymentRequest);
         log.info("======================== payment creation completed ========================");
+        //send order confirmation -->  notification microservice
+        notificationProducer.sendNotification(
+                new OrderNotificationRequest( order.getId(),
+                        orderRequest.reference(),
+                        orderRequest.paymentMethod(),
+                        orderRequest.amount(),
+                        customer,
+                        purchaseList
+                )
 
+        );
         return "success";
     }
 }
