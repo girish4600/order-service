@@ -3,7 +3,7 @@ spring:
     name: order-service
 
 server:
-  port: 8082
+  port: 8080
 
 eureka:
   client:
@@ -12,4 +12,4 @@ eureka:
 
   instance:
     prefer-ip-address: true
-    non-secure-port: 8082
+    non-secure-port: 8080
