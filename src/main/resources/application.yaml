@@ -12,7 +12,7 @@ spring:
       project-id: one-step-gcp
 
 server:
-  port: 8082
+  port: 8080
 
 #enable this when we used eureka service
 #eureka:
